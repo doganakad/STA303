@@ -1,0 +1,59 @@
+---
+title:  Visualizing Data Using ggplot2
+author: |
+  | Last name: Akad
+  | First name: Dogan
+  | Student ID: 1001386083
+  | Course section: STA303H1S-L0101
+date: "Jan 21st, 2017"
+output: pdf_document
+fontsize: 10pt
+---
+
+# \textcolor{blue}{ Q1 - Factor variables analysis}
+
+\textbf{Question: (1 point)} How many factor variables in this data set? Use R command \textit{str(diamonds)} to find it. For each factor variable, find the one-way frequency table for it. An example of cut variable is given in the solution template.
+
+\textbf{Answer}: We have 3 factor variables. They are cut (with 5 levels),color(with 7 levels), clarity(with 8 levels).
+
+```{r,echo=TRUE,eval=TRUE,warning=FALSE}
+library(ggplot2)
+# read in the file
+data(diamonds)
+
+# check the type of variables in this data
+str(diamonds)
+
+# observations for each level of "cut" variable
+table(diamonds$cut) # or summary(diamonds$cut)
+
+# find the level frequency of "cut" varible
+prop.table( table(diamonds$cut) ) # or summary(diamonds$cut)/nrow(diamonds)
+
+# find the level frequency of "color" variable 
+prop.table( table(diamonds$color) )
+
+# find the level frequency of "clarity" variable
+prop.table( table(diamonds$clarity) )
+
+```
+  
+\newpage 
+
+# \textcolor{blue}{ Q2 -Produce plot and give comment}
+
+## Scatter plot 
+
+```{r,echo=TRUE,eval=TRUE, warning=FALSE}
+library(ggplot2)
+library(plyr)
+# read in the data file
+data(diamonds)
+qplot(carat, price, data = diamonds, colour = clarity)
+
+```
+
+## Comments: 
+Price always increases with all the levels of clarity. Price grows close to linear when the carat has the worst clarity. As the clarity increases the price starts to grow quadratically. When the carat has the best clarity(IF) price grows the fastest. So from this plot we can see that carat clarity has a big effect on the price.
+
+
